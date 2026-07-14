@@ -40,5 +40,20 @@ Você precisa ter o [Node.js](https://nodejs.org/) instalado na sua máquina.
 4. Execute o script:
 
     node organizador.js
-   
+
+### 🔄 Rodando em Segundo Plano (Windows)
+
+Para rodar o script de forma invisível e garantir que ele inicie junto com o Windows, utilizamos o **PM2** com seu módulo para Windows:
+
+1. Instale o PM2 e o módulo de startup globalmente:
+   ```bash
+   npm install -g pm2 pm2-windows-startup
+
+2. pm2-startup install
+
+3. pm2 start organizador.js --name "organizador-downloads"
+
+4. pm2 save
+
+
 ## 👨‍💻 Desenvolvido por **Willyan Gabriel**
