@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
+// Importa as configurações do nosso arquivo JSON
+const config = require('./config.json');
+
 // 1. Define os caminhos base
 const pastaUsuario = process.env.USERPROFILE || process.env.HOME;
 const pastaDownloads = path.join(pastaUsuario, 'Downloads');
-
-// Define a nova pasta de destino fora do Downloads
 const pastaDestinoBase = path.join(pastaUsuario, 'Arquivos_Organizados');
 
 // Garante que a pasta base de destino exista antes de começar
@@ -13,14 +14,8 @@ if (!fs.existsSync(pastaDestinoBase)) {
     fs.mkdirSync(pastaDestinoBase);
 }
 
-// 2. Mapeia os tipos de arquivos para suas respectivas pastas
-const categorias = {
-    'Imagens': ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'],
-    'Documentos': ['.pdf', '.doc', '.docx', '.txt', '.xlsx', '.csv'],
-    'Instaladores': ['.exe', '.msi', '.dmg', '.pkg'],
-    'Compactados': ['.zip', '.rar', '.7z', '.tar', '.gz'],
-    'Desenvolvimento': ['.js', '.html', '.css', '.json', '.py']
-};
+// 2. Carrega as categorias do arquivo de configuração
+const categorias = config.categorias;
 
 // Função para descobrir para qual pasta o arquivo deve ir
 function descobrirDestino(extensao) {
@@ -43,31 +38,25 @@ fs.watch(pastaDownloads, (evento, nomeArquivo) => {
 
     // Aguarda um pequeno delay para garantir que o download terminou antes de mover
     setTimeout(() => {
-        // Verifica se o arquivo ainda existe (pode ter sido um arquivo temporário deletado)
         if (!fs.existsSync(caminhoAntigo)) return;
 
-        // Pega a extensão do arquivo
         const extensao = path.extname(nomeArquivo);
-        if (!extensao) return; // Ignora pastas ou arquivos sem extensão
+        if (!extensao) return; 
 
         const nomePastaDestino = descobrirDestino(extensao);
-        
-        // AGORA USA A NOVA PASTA BASE COMO DESTINO
         const caminhoPastaDestino = path.join(pastaDestinoBase, nomePastaDestino);
 
-        // Cria a subpasta de destino se ela não existir
         if (!fs.existsSync(caminhoPastaDestino)) {
             fs.mkdirSync(caminhoPastaDestino);
         }
 
         const caminhoNovo = path.join(caminhoPastaDestino, nomeArquivo);
 
-        // Move o arquivo
         try {
             fs.renameSync(caminhoAntigo, caminhoNovo);
             console.log(`Movido: ${nomeArquivo} -> ${nomePastaDestino}`);
         } catch (erro) {
             console.error(`Erro ao mover ${nomeArquivo}:`, erro.message);
         }
-    }, 1000); // 1 segundo de delay
+    }, 1000);
 });

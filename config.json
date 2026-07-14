@@ -1,0 +1,9 @@
+{
+  "categorias": {
+    "Imagens": [".jpg", ".jpeg", ".png", ".gif", ".svg", ".webp"],
+    "Documentos": [".pdf", ".doc", ".docx", ".txt", ".xlsx", ".csv"],
+    "Instaladores": [".exe", ".msi", ".dmg", ".pkg"],
+    "Compactados": [".zip", ".rar", ".7z", ".tar", ".gz"],
+    "Desenvolvimento": [".js", ".html", ".css", ".json", ".py", ".jsx", ".ts", ".tsx"]
+  }
+}

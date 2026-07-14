@@ -1,0 +1,21 @@
+{
+  "name": "organizador-dowloads",
+  "version": "1.0.0",
+  "description": "",
+  "main": "organizador.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Willyang10x/Organizador-de-Dowloads.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Willyang10x/Organizador-de-Dowloads/issues"
+  },
+  "homepage": "https://github.com/Willyang10x/Organizador-de-Dowloads#readme"
+}
