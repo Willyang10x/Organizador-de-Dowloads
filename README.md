@@ -55,5 +55,14 @@ Para rodar o script de forma invisível e garantir que ele inicie junto com o Wi
 
 4. pm2 save
 
+## 📦 Criando Executáveis Standalone (.exe e Linux)
+
+Você pode compilar este projeto em um arquivo executável que roda nativamente em qualquer máquina, sem precisar do Node.js instalado.
+
+1. Instale a ferramenta `pkg` globalmente:
+   ```bash
+   npm install -g pkg
+
+2. pkg . --targets "node18-win-x64,node18-linux-x64" --out-path dist/
 
 ## 👨‍💻 Desenvolvido por **Willyan Gabriel**

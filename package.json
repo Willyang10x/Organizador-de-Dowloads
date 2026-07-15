@@ -1,8 +1,8 @@
 {
-  "name": "organizador-dowloads",
+  "name": "organizador-downloads",
   "version": "1.0.0",
-  "description": "",
-  "main": "organizador.js",
+  "bin": "./organizador.js",
+  "description": "Organizador automático de ficheiros",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
