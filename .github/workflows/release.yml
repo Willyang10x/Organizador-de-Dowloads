@@ -35,7 +35,7 @@ jobs:
           
           # Move o binário gerado pelo pkg e dá permissão
           # ATENÇÃO: Se o nome "name" no seu package.json for diferente de "organizador-downloads", mude a linha abaixo!
-          cp dist/organizador-downloads dist/organizador_1.0.0_amd64/usr/local/bin/organizador
+          cp dist/*-linux dist/organizador_1.0.0_amd64/usr/local/bin/organizador
           chmod +x dist/organizador_1.0.0_amd64/usr/local/bin/organizador
           
           # Cria o arquivo de configuração de forma automática
