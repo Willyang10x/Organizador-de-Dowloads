@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Willyang10x/Organizador-de-Dowloads/issues"
   },
-  "homepage": "https://github.com/Willyang10x/Organizador-de-Dowloads#readme"
+  "homepage": "https://github.com/Willyang10x/Organizador-de-Dowloads#readme",
+  "dependencies": {
+    "node-notifier": "^10.0.1"
+  }
 }

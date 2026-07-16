@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const notifier = require('node-notifier');
 
 // Importa as configurações do nosso arquivo JSON
 const config = require('./config.json');
@@ -24,11 +25,11 @@ function descobrirDestino(extensao) {
             return pasta;
         }
     }
-    return 'Outros'; // Pasta padrão para arquivos não mapeados
+    return 'Outros'; 
 }
 
-console.log(`Monitorando a pasta: ${pastaDownloads}...`);
-console.log(`Os arquivos serão movidos para: ${pastaDestinoBase}`);
+console.log(`👀 Monitorando a pasta: ${pastaDownloads}...`);
+console.log(`📁 Os arquivos serão movidos para: ${pastaDestinoBase}`);
 
 // 3. Fica "escutando" as mudanças na pasta
 fs.watch(pastaDownloads, (evento, nomeArquivo) => {
@@ -36,7 +37,7 @@ fs.watch(pastaDownloads, (evento, nomeArquivo) => {
 
     const caminhoAntigo = path.join(pastaDownloads, nomeArquivo);
 
-    // Aguarda um pequeno delay para garantir que o download terminou antes de mover
+    // Aguarda um delay para garantir que o download terminou antes de mover
     setTimeout(() => {
         if (!fs.existsSync(caminhoAntigo)) return;
 
@@ -54,9 +55,18 @@ fs.watch(pastaDownloads, (evento, nomeArquivo) => {
 
         try {
             fs.renameSync(caminhoAntigo, caminhoNovo);
-            console.log(`Movido: ${nomeArquivo} -> ${nomePastaDestino}`);
+            console.log(`✅ Movido: ${nomeArquivo} -> ${nomePastaDestino}`);
+            
+            // 🔔 Dispara a notificação nativa no sistema operacional
+            notifier.notify({
+                title: 'Organizador de Downloads',
+                message: `Arquivo movido para: ${nomePastaDestino}\n📁 ${nomeArquivo}`,
+                sound: true, // Toca o som padrão de notificação do sistema
+                wait: false  // Não pausa o código esperando você clicar na notificação
+            });
+
         } catch (erro) {
-            console.error(`Erro ao mover ${nomeArquivo}:`, erro.message);
+            console.error(`❌ Erro ao mover ${nomeArquivo}:`, erro.message);
         }
     }, 1000);
 });
